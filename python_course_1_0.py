@@ -1,4 +1,5 @@
 # 函式練習
+# 範例: 跟這個世界say Hi
 def sayHelloToThisWorld(): 
     print('Hello, World!')
 
