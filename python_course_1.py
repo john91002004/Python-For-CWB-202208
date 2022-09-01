@@ -107,13 +107,20 @@ def outputMxNComplexToFile(M, N):
     writeToFile(content, 'MxNComplex.txt')
     
 
-# 重構(refactoring)
+# 重構(Refactoring)
 # 通常開發程式碼的時候，想法非常亂，以至於Code也非常亂，
 # 因此，我們必須在一段時間之後(通常是寫完一個函式或類別)，就重構。
 # 重構的目的在於，使得往後程式碼開發變得更加容易、簡便，好閱讀。
-# 重構後的特色: "human-readable" "human-readable" "human-readable"
+# 重構後的特色: "Human-readable" "Human-readable" "Human-readable"
+# 重構不一定會讓整體的程式碼變得更加簡短，而且通常會變得更長，但是會變得更容易閱讀、理解。
 
-def outputMxNComplexToFile(M, N):
+# 命名: 簡單明瞭地敘述該 函式 或 變數 是做什麼用的。 (通常 長命名 比 短命名 更具描述力)
+# 函式內部結構: 清楚表達該函式的邏輯
+# 降層法則: 當一個函式呼叫另一個函式的時候，被呼叫的函式通常會寫在呼叫他的函式下方。
+#          這樣當你由上往下讀的時候，就好像在閱讀很有結構的文章一樣，先是說明大綱，再一步一步的拆解大綱，最後是細節。
+
+# 這個函式是上一個函式重構之後的樣子，變得非常容易閱讀。
+def outputMxNComplexToFile_Refactor(M, N):
     num_arr = generateComplexArray(M, N)
     s = convertArrayIntoString(num_arr)
     writeToFile(s, 'MxNComplex.txt')
