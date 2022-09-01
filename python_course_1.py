@@ -79,7 +79,6 @@ def readFileAsList(file):
         str_list = fr.readlines()
     return str_list 
 
-
 # Problem: 讀取和寫入
 def writeToFile(content, file):
     with open(file, 'w') as fw: 
@@ -89,3 +88,92 @@ def readFromFile(file):
     with open(file) as fr: 
         s = fr.read()
     return s 
+
+# Problem: 產生MxN 複數陣列，並存成檔案，如以下形式:
+# 0j, 1j, 2j, ... Mj 
+# (1+0j), (1+1j), (1+2j), ... (1+Mj)
+# ...
+# (N+0j), (N+1j), (N+2j), ... (N+Mj)
+def outputMxNComplexToFile(M, N):
+    num_list = []
+    for i in range(N+1): 
+        tmp_list = [] 
+        for j in range(M+1): 
+            num = complex(i,j)
+            tmp_list.append(str(num))
+        tmp_str = ', '.join(tmp_list)
+        num_list.append(tmp_str)
+    content = '\n'.join(num_list)
+    writeToFile(content, 'MxNComplex.txt')
+    
+
+# 重構(refactoring)
+# 通常開發程式碼的時候，想法非常亂，以至於Code也非常亂，
+# 因此，我們必須在一段時間之後(通常是寫完一個函式或類別)，就重構。
+# 重構的目的在於，使得往後程式碼開發變得更加容易、簡便，好閱讀。
+# 重構後的特色: "human-readable" "human-readable" "human-readable"
+
+def outputMxNComplexToFile(M, N):
+    num_arr = generateComplexArray(M, N)
+    s = convertArrayIntoString(num_arr)
+    writeToFile(s, 'MxNComplex.txt')
+
+def generateComplexArray(M, N):
+    num_list = [] 
+    for i in range(N+1): 
+        tmp_list = []
+        for j in range(M+1): 
+            num = complex(i, j)
+            tmp_list.append(num)
+        num_list.append(tmp_list)
+    return num_list 
+
+def convertArrayIntoString(arr):
+    tmp_list = [] 
+    for item in arr: 
+        str_item = [ str(num) for num in item ]
+        tmp_str = ', '.join(str_item)
+        tmp_list.append(tmp_str)
+    return '\n'.join(tmp_list)
+
+# 
+import json 
+def saveAsJson(data ,json_file): 
+    json_str = json.dumps(data)
+    writeToFile(json_str, json_file)
+
+def loadFromJson(json_file): 
+    json_str = readFromFile(json_file)
+    return json.loads(json_str)
+
+# 
+def outputMxNComplexAsJson(M, N): 
+    outputMxNComplexToFile(M, N)
+    tmp_str = readFromFile('MxNComplex.txt')
+    num_array = convertStringIntoArray(tmp_str) 
+    num_dict = generateDictFromComplexArray(num_array) 
+    saveAsJson(num_dict)
+
+def convertStringIntoArray(s):
+    tmp_dict = generateFirstLevelDict(s)
+    for key in tmp_dict.keys(): 
+        tmp_dict[key] = convertComplexIntoDict( complex(key) )
+    return tmp_dict
+
+def generateFirstLevelDict(s): 
+    tmp_dict = {}
+    tmp_list = convertStringIntoList(s)
+    for item in tmp_list: 
+        tmp_dict[item] = convertArrayIntoString( complex(item) ) 
+    return tmp_dict 
+
+def convertStringIntoList(s):
+    new_list = []
+    s = s.split('\n')
+    for item in s: 
+        tmp_str_list = item.split(', ')
+        new_list.extend(tmp_str_list)
+        
+    
+
+
