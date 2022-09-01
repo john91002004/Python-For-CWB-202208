@@ -12,3 +12,8 @@
 2. 其他運算符號 (>> << += // % -= *= /=)
 3. Visual Code 的 intellisense (有顏色和沒顏色的變數差別)
 4. 檔案操作
+## 2022-09-01
+1. Json檔案 讀取/寫入
+2. 引入重構(Refactor)的概念 -> 好閱讀(Human-readable)
+
+
