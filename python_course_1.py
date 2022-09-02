@@ -119,11 +119,11 @@ def outputMxNComplexToFile(M, N):
 # 降層法則: 當一個函式呼叫另一個函式的時候，被呼叫的函式通常會寫在呼叫他的函式下方。
 #          這樣當你由上往下讀的時候，就好像在閱讀很有結構的文章一樣，先是說明大綱，再一步一步的拆解大綱，最後是細節。
 
-# 這個函式是上一個函式重構之後的樣子，變得非常容易閱讀。
-def outputMxNComplexToFile_Refactor(M, N):
-    num_arr = generateComplexArray(M, N)
-    s = convertArrayIntoString(num_arr)
-    writeToFile(s, 'MxNComplex.txt')
+# 這個函式是上一個函式重構之後的樣子，函式結構變得非常清楚，程式碼變得非常容易閱讀。
+def outputMxNComplexToFile_Refactor(M, N):  # 函式名稱一目瞭然，可以知道整個函會做什麼事情
+    num_arr = generateComplexArray(M, N)    # 首先，產生一個複數陣列
+    s = convertArrayIntoString(num_arr)     # 第二，將陣列轉換成字串
+    writeToFile(s, 'MxNComplex.txt')        # 最後，將字串寫入檔案
 
 def generateComplexArray(M, N):
     num_list = [] 
@@ -143,7 +143,8 @@ def convertArrayIntoString(arr):
         tmp_list.append(tmp_str)
     return '\n'.join(tmp_list)
 
-# 
+# 學習將資料結構如 list dict tuple等等，存成json檔。
+# json.dumps 和 json.loads 分別可以把 資料結構轉換成字串 和 字串轉換成資料結構。
 import json 
 def saveAsJson(data ,json_file): 
     json_str = json.dumps(data)
@@ -152,35 +153,3 @@ def saveAsJson(data ,json_file):
 def loadFromJson(json_file): 
     json_str = readFromFile(json_file)
     return json.loads(json_str)
-
-# 
-def outputMxNComplexAsJson(M, N): 
-    outputMxNComplexToFile(M, N)
-    tmp_str = readFromFile('MxNComplex.txt')
-    num_array = convertStringIntoArray(tmp_str) 
-    num_dict = generateDictFromComplexArray(num_array) 
-    saveAsJson(num_dict)
-
-def convertStringIntoArray(s):
-    tmp_dict = generateFirstLevelDict(s)
-    for key in tmp_dict.keys(): 
-        tmp_dict[key] = convertComplexIntoDict( complex(key) )
-    return tmp_dict
-
-def generateFirstLevelDict(s): 
-    tmp_dict = {}
-    tmp_list = convertStringIntoList(s)
-    for item in tmp_list: 
-        tmp_dict[item] = convertArrayIntoString( complex(item) ) 
-    return tmp_dict 
-
-def convertStringIntoList(s):
-    new_list = []
-    s = s.split('\n')
-    for item in s: 
-        tmp_str_list = item.split(', ')
-        new_list.extend(tmp_str_list)
-        
-    
-
-
