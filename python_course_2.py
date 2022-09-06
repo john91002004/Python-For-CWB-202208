@@ -51,4 +51,175 @@ class Student(Person):
     def getAge(self): 
         print('Suck yourself.')
 
+# 練習寫類別
+# 父類別: Animal 
+#   方法: sound, eat
+# 子類別: Bird, Cat, Dog
+class Animal:
+
+    def __init__(self, age=0, length=1, weight=1):
+        self.age = age
+        self.length = length
+        self.weight = weight
+
+    def sound(self):
+        pass
+
+    def eat(self):
+        pass 
+
+class Dog(Animal): 
+
+    def sound(self):
+        print('汪汪!')
+
+    def eat(self, food):
+        if food != 'bones': 
+            print('汪汪!真難吃!')  
+
+class Cat(Animal):
+
+    def sound(self):
+        print('喵喵')
+        
+    def eat(self): 
+        print('本喵准你進貢~')
+
+class Bird(Animal):
+
+    def sound(self):
+        print('啾啾!')
+
+    def eat(self): 
+        print('不要餵我飼料')
+
+# 練習寫類別
+# 父類別: Geometry
+#   方法: 計算面積
+#   方法: 計算周長
+# 子類別: 
+#  1. 圓形
+#  2. 長方形
+#  3. 正方形
+#  4. 三角形
+from math import pi, sqrt 
+class Geometry: 
+
+    def __init__(self): 
+        self.name = 'Geometry'
+    
+    def calArea(self): 
+        pass
+    
+    def calPerimeter(self):
+        pass
+    
+    def introduceMyself(self):
+        print(f'I am {self.name}')
+
+# 以下為子類別，全都繼承了Geometry父類別，並且擁有 introduceMyself 方法可以呼叫。
+# 此時，不需要 override 這個方法，只需要 override 其中的 self.name 即可。
+# 這樣，每一種幾何圖形，都會有不同的 introduceMyself 內容。
+class Circle(Geometry):
+
+    def __init__(self, radius):
+        self.name = 'Circle'
+        self.radius = radius
+    
+    def calArea(self):
+        return pi * self.radius ** 2
+    
+    def calPerimeter(self):
+        return 2 * pi * self.radius
+
+class Rectangle(Geometry):
+
+    def __init__(self, length, width):
+        self.name = 'Rectangle'
+        self.len = length
+        self.wid = width
+    
+    def calArea(self):
+        return self.len * self.wid
+    
+    def calPerimeter(self):
+        return 2 * (self.len + self.wid)
+
+class Square(Geometry): 
+    
+    def __init__(self, side):
+        self.name = 'Square'
+        self.side = side
+    
+    def calArea(self):
+        return self.side * self.side
+    
+    def calPerimeter(self):
+        return 4 * self.side 
+
+class Triangle(Geometry): 
+    
+    def __init__(self, a, b, c):
+        self.name = 'Triangle'
+        self.a = a 
+        self.b = b 
+        self.c = c 
+    
+    def calArea(self): # 海龍公式
+        s = (self.a + self.b + self.c) / 2
+        return sqrt( s * (s-self.a) * (s-self.b) * (s-self.c) )
+    
+    def calPerimeter(self):
+        return self.a + self.b + self.c
+
+# 練習寫類別
+# 練習Class super_complex 
+class super_complex:
+
+    def __init__(self, value): 
+        self.value = self.__convertToComplex(value)
+        self.real = self.__getRealPart()
+        self.imag = self.__getImagPart()
+        self.abs = self.__calAbs()
+    
+    def __convertToComplex(self, value):
+        return complex(value)
+
+    def __getRealPart(self):
+        return self.value.real 
+    
+    def __getImagPart(self):
+        return self.value.imag
+    
+    def __calAbs(self):
+        return abs(self.value)
+
+    # 以下兩個方法是Magic Method，我們重新定義它們來 override 原本的方法。
+    def __repr__(self):
+        if self.value == 0: 
+            return '0'
+        elif self.value.imag == 0: 
+            tmp = str(self.value).strip('()')
+            return tmp.split('+')[0]
+        else: 
+            return str(self.value).strip(')(')
+
+    def __str__(self):
+        return self.__repr__()
+
+# 用自定義的類別，重新練習之前寫過的函式
+# Problem 3: 
+# 輸入兩個非負整數，回傳一個字串，字串中的各個複數用", "將連起來
+# Ex: funcName(1,2) -> '0, 1j, 2j, 1, 1+1j, 1+2j'
+def generateComplexString3(N, M):
+    tmp_list = []
+    for i in range(N+1): 
+        for j in range(M+1):
+            num = complex(i, j)
+            num_str = str( super_complex(num) )
+            tmp_list.append( num_str )
+    return ', '.join(tmp_list)
+
+
+
 
