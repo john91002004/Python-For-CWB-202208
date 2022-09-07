@@ -19,8 +19,8 @@
 1. 定義類別(Class)
 2. 物件導向三大特色: 封裝、繼承、多型
 ## 2022-09-06
-1. 覆載神奇方法(override Magic Method): __repr__, __str__
+1. 覆載神奇方法(override Magic Method): \_\_repr\_\_, \_\_str\_\_
 2. 使用super()呼叫父類別的成員
 ## 2022-09-07 
-1. 覆載神奇方法: "__eq__", "__add__"
+1. 覆載神奇方法: \_\_eq__, \_\_add\_\_
 2. 實作Stack, Queue
