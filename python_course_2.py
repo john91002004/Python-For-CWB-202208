@@ -195,6 +195,7 @@ class super_complex:
         return abs(self.value)
 
     # 以下兩個方法是Magic Method，我們重新定義它們來 override 原本的方法。
+    # __repr__ 方法是用來表示(represent) 這個物件的，當我們在互動視窗執行這個物件時，就會調用這個函式。
     def __repr__(self):
         if self.value == 0: 
             return '0'
@@ -204,8 +205,23 @@ class super_complex:
         else: 
             return str(self.value).strip(')(')
 
+    # __str__ 方法是在呼叫 str() 時，會調用的函式。 
     def __str__(self):
         return self.__repr__()
+    
+    # __eq__ 例如: a==b 就等於self是a，other是b。
+    def __eq__(self, other):
+        if type(self) != type(other):   # 先判斷是不是同樣的type
+            return False 
+        elif self.value == other.value: # 再判斷是不是同樣的值
+            return True 
+        else:
+            return False 
+
+    # __add__ 例如: a+b 就等於self是a，other是b。
+    def __add__(self, other):
+        return super_complex(self.value + other.value)
+
 
 # 用自定義的類別，重新練習之前寫過的函式
 # Problem 3: 

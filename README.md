@@ -21,3 +21,6 @@
 ## 2022-09-06
 1. 覆載神奇方法(override Magic Method): __repr__, __str__
 2. 使用super()呼叫父類別的成員
+## 2022-09-07 
+1. 覆載神奇方法: __eq__, __add__
+2. 實作Stack, Queue
