@@ -22,5 +22,8 @@
 1. 覆載神奇方法(override Magic Method): \_\_repr\_\_, \_\_str\_\_
 2. 使用super()呼叫父類別的成員
 ## 2022-09-07 
-1. 覆載神奇方法: \_\_eq__, \_\_add\_\_
+1. 覆載神奇方法: \_\_eq\_\_, \_\_add\_\_
 2. 實作Stack, Queue
+## 2022-09-12
+1. UnitTest 基本概念和用法
+2. 測試Stack, Queue
