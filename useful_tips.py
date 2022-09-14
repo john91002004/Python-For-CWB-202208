@@ -56,3 +56,23 @@ print("="*30)
 # Tip 7: 
 # 想要重複輸入 某個字串 或 某個字元，可以用 * (乘號)
 print("-o-"*10)
+
+# Tip 8: 
+# 命名法 
+# python -> get_things_from_black_hole()
+# C# Powershell -> GetThingsFromBlackHole()
+# Java -> getThingsFromBlackHole() (camal case 駝峰寫法)
+
+# Tip 9: 
+# 換行寫法
+a = 1 + 2 + 3333333333333333333333 + \
+    16 + 123 + 123
+def func(
+    a, b, c, d,
+    e, f, g, h
+):
+    pass
+
+b = [1,
+2]
+
