@@ -1,8 +1,5 @@
 import unittest
 from Player import Player
-# 拿牌
-# 用腦子玩牌，決定怎麼出
-# 出牌
 
 # 在寫好CardTest和Card以後，我們寫了一個PlayerTest。
 class PlayerTest(unittest.TestCase):
@@ -20,7 +17,18 @@ class PlayerTest(unittest.TestCase):
         for card in cards:
             with self.subTest(card=card):
                 self.assertIn(card, a.hand_cards)
-        
+    
+    def testPlayCards(self): 
+        a = Player('John')
+        cards = [('spade', '2'), ('diamond', 'K')]
+        a.getCards(cards)
+        tmp = []
+        tmp.append( a.playCard() )
+        tmp.append( a.playCard() )
+        self.assertIn(tmp[0], cards)
+        self.assertIn(tmp[1], cards)
+
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=4)
