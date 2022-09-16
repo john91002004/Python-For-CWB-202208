@@ -18,4 +18,12 @@ class Card:
         return True if a > b else False 
     # 我們發現在測試的輸出當中，我們的Card物件顯示了我不想要看到的記憶體位置，所以我們覆寫這個方法。
     def __repr__(self): 
-        return str( (self.suit, self.value) )
+        if self.suit == 'club': 
+            suit = '♣'
+        elif self.suit == 'diamond': 
+            suit = '♦'
+        elif self.suit == 'heart': 
+            suit = '♥'
+        elif self.suit == 'spade': 
+            suit = '♠'
+        return str( (suit, self.value) )

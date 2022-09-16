@@ -38,7 +38,7 @@ class GameTest(unittest.TestCase):
         winner_index = cardsPlayed.index( max(cardsPlayed) )
         winner = self.correspondingWinner(winner_index)
         self.assertEqual(record_winner, winner)
-
+    # 我們測試每1回合後的Winner是不是跟紀錄上寫的相同。
     def testWinnerAfterEachRound(self): 
         for count in range(1,14): 
             with self.subTest(round=count):
@@ -58,6 +58,32 @@ class GameTest(unittest.TestCase):
             return self.C
         elif index == 3: 
             return self.D
+
+    # 我們測試1個賽局的贏家是否和紀錄相同。
+    # P.S. 我們在這裡用了跟Game裡面一樣的測試方法，這導致了監守自盜的問題。
+    # P.S. 但我們實在是江郎才盡想不出來了，只好出此下策。
+    def testMatchWinner(self):
+        self.game.runThirteenRounds()
+        player_winRound_list = self.recordPlayerWinRound(self.game)
+        winner = self.maxWinRoundPlayer(player_winRound_list)
+        self.assertEqual(winner, self.game.match_winner)
+
+    def recordPlayerWinRound(self, game):
+        winner_list = []
+        for round_index in range(13):
+            winner_list.append( game.record[round_index][4] ) 
+        A_win_round, B_win_round, C_win_round, D_win_round = \
+            winner_list.count(self.A), winner_list.count(self.B), winner_list.count(self.C), winner_list.count(self.D)
+        return [[self.A, A_win_round], [self.B, B_win_round], [self.C, C_win_round], [self.D, D_win_round]]
+        
+    def maxWinRoundPlayer(self, ele_list): 
+        ele_list = sorted(ele_list, key=lambda s:s[1], reverse=True)
+        winner_list = []
+        winner_list.append(ele_list[0][0])
+        for index in range(1,4):
+            if ele_list[index][1] == ele_list[0][1]: 
+                winner_list.append(ele_list[index][0])
+        return winner_list 
 
 
 if __name__ == '__main__': 

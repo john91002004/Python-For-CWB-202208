@@ -29,3 +29,4 @@
 2. 測試Stack, Queue
 ## 2022-09-13~16
 1. 實作 CardGame
+2. 展示Smart_Player的實力輾壓
