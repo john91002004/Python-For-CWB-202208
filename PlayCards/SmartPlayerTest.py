@@ -1,17 +1,14 @@
 import unittest
 from Card import Card
-from Player import Player
+from SmartPlayer import Smart_Player
 
-# 在寫好CardTest和Card以後，我們寫了一個PlayerTest。
-class PlayerTest(unittest.TestCase):
+class SmartPlayerTest(unittest.TestCase):
 
     def setUp(self) -> None:
-        self.a = Player("John") 
+        self.a = Smart_Player("John") 
         self.cards = [Card('spade', '2'), Card('diamond', 'K')]
         return super().setUp()
-    # 我們希望這一個Player有 取牌 的功能。
-    # 取牌前應該沒有手牌，取牌後應該有相對應數量的手牌。
-    # 並且，有相對應的牌。
+
     def testGetCards(self): 
         self.assertEqual( len(self.a.hand_cards), 0) 
 
@@ -29,7 +26,7 @@ class PlayerTest(unittest.TestCase):
         tmp.append( self.a.playCard() )
         self.assertIn(tmp[0], self.cards)
         self.assertIn(tmp[1], self.cards)
-    # 在Player Reset之後，手牌應該要是空的。
+        
     def testPlayerReset(self): 
         self.a.reset()
         self.assertEqual(self.a.hand_cards, [])

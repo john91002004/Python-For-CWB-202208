@@ -1,4 +1,5 @@
 import unittest
+from CheatPlayer import CheatPlayer
 from Game import Game
 from Player import Player
 
@@ -84,6 +85,12 @@ class GameTest(unittest.TestCase):
             if ele_list[index][1] == ele_list[0][1]: 
                 winner_list.append(ele_list[index][0])
         return winner_list 
+
+    # 測試有人作弊的時候，是否能將他揪出來。
+    def testGameRaiseExceptionIfPlayerCheat(self): 
+        g = Game(CheatPlayer('JoJo'), Player('B'), Player('C'), Player('D'))
+        with self.assertRaises(Exception): 
+            g.runThirteenRounds() 
 
 
 if __name__ == '__main__': 
